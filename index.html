@@ -65,11 +65,6 @@ nav a{display:inline-flex;align-items:center;justify-content:center;padding:9px 
 nav a:hover{color:var(--ink);background:rgba(29,78,216,.05);transform:translateY(-1px)}
 nav a:focus-visible{background:rgba(29,78,216,.06)}
 .actions{display:flex;align-items:center;gap:10px}
-.nav-toggle{display:none;align-items:center;justify-content:center;width:42px;height:42px;flex:none;padding:0;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--ink);cursor:pointer}
-.nav-toggle-icon{display:grid;gap:4px}
-.nav-toggle-icon i{display:block;width:16px;height:1.5px;background:currentColor}
-.nav-toggle[aria-expanded="true"]{border-color:var(--brand);color:var(--brand)}
-.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 .availability-pill{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:rgba(14,159,110,.06);border:1px solid rgba(14,159,110,.12);color:var(--ok);font-size:12.5px;font-weight:700;letter-spacing:.01em}
 .availability-pill::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 4px rgba(14,159,110,.12)}
 .logo, .btn, .pill, .mode, .proj, .sk, .cert, .education-panel, .links a, .item, .id-card, .announce a{transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease, background .2s ease, filter .2s ease}
@@ -371,7 +366,7 @@ footer a.footer-logo:hover{color:var(--brand)!important;transform:none;box-shado
 @media(max-width:700px){footer .wrap>.footer-main{grid-template-columns:repeat(2,minmax(0,1fr));gap:32px}}
 @media(max-width:520px){footer .wrap>.footer-main{grid-template-columns:1fr;gap:28px;padding:42px 0 30px}}
 @media(max-width:520px){.resume-dialog{width:calc(100% - 20px);height:92vh;border-radius:8px}.resume-dialog-header{padding:13px 14px}.resume-dialog-footer{align-items:stretch;flex-direction:column;gap:9px;padding:11px 14px}.resume-dialog-actions{display:grid;grid-template-columns:1fr 1fr}.resume-dialog-actions .btn{padding:10px 9px;font-size:12px}}
-@media(max-width:900px){header{padding:8px 0}.bar{min-height:60px;gap:8px 10px;padding:8px 0;border:0;border-radius:0;background:transparent;box-shadow:none}.nav-toggle{display:inline-flex;order:2}.actions{order:3;gap:6px;margin-left:auto}nav{display:none;order:4;width:100%;overflow:visible}.bar.menu-open nav{display:block}nav ul{display:grid;min-width:0;justify-content:stretch;gap:0;padding-top:8px;border-top:1px solid var(--line)}nav li+li{border-top:1px solid var(--line)}nav a{display:flex;width:100%;justify-content:flex-start;padding:12px 8px;font-size:14px}}
+@media(max-width:900px){header{padding:6px 0}.bar{height:auto;min-height:0;flex-wrap:wrap;gap:2px 10px;padding:6px 0;border:0;border-radius:0;background:transparent;box-shadow:none}.actions{order:2;gap:6px;margin-left:auto}nav{display:block;order:3;width:100%;overflow-x:auto;scrollbar-width:none}nav::-webkit-scrollbar{display:none}nav ul{display:flex;justify-content:space-between;min-width:max-content;gap:4px;padding:0;border:0}nav a{display:inline-flex;width:auto;justify-content:center;padding:8px 4px;font-size:12px;white-space:nowrap}.availability-pill{display:none}html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 120px)}}
 @media(max-width:360px){.hero h1{font-size:34px;line-height:1.12}.learning-path{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 </style>
@@ -381,10 +376,6 @@ footer a.footer-logo:hover{color:var(--brand)!important;transform:none;box-shado
 <header>
   <div class="wrap bar">
     <a class="logo" href="#top" aria-label="Vaidik Vala, home"><img class="logo-avatar" src="vaidik-avatar.jpg" alt="">Vaidik Vala</a>
-    <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="primary-navigation">
-      <span class="nav-toggle-icon" aria-hidden="true"><i></i><i></i><i></i></span>
-      <span class="sr-only">Menu</span>
-    </button>
     <nav id="primary-navigation" aria-label="Primary"><ul>
       <li><a href="#projects">Projects</a></li>
       <li><a href="#skills">Skills</a></li>
@@ -724,12 +715,6 @@ footer a.footer-logo:hover{color:var(--brand)!important;transform:none;box-shado
   resumeDialog.addEventListener('click',function(event){if(event.target===resumeDialog){resumeDialog.close();}});
   document.addEventListener('keydown',function(event){if(event.key==='Escape'&&resumeDialog.open){event.preventDefault();resumeDialog.close();}},true);
 
-  var menuToggle=document.querySelector('.nav-toggle');
-  var headerBar=document.querySelector('.bar');
-  function closeMenu(){headerBar.classList.remove('menu-open');menuToggle.setAttribute('aria-expanded','false');}
-  menuToggle.addEventListener('click',function(){var isOpen=menuToggle.getAttribute('aria-expanded')==='true';headerBar.classList.toggle('menu-open',!isOpen);menuToggle.setAttribute('aria-expanded',String(!isOpen));});
-  document.querySelectorAll('#primary-navigation a').forEach(function(link){link.addEventListener('click',closeMenu);});
-  document.addEventListener('keydown',function(event){if(event.key==='Escape'&&menuToggle.getAttribute('aria-expanded')==='true'){closeMenu();}});
 })();
 </script>
 </body>
