@@ -60,15 +60,16 @@ header{position:sticky;top:0;z-index:30;padding:16px 0;background:var(--header-b
 .bar{display:flex;align-items:center;justify-content:space-between;height:72px;gap:18px;padding:0 18px;border:1px solid rgba(148,163,184,.18);border-radius:18px;background:linear-gradient(180deg,var(--surface),var(--surface-alt));box-shadow:0 12px 30px rgba(15,23,42,.04)}
 .logo{display:flex;align-items:center;gap:11px;text-decoration:none;font-weight:800;font-size:18px;letter-spacing:-.02em}
 .logo-avatar{width:36px;height:36px;flex:none;object-fit:cover;object-position:center;border-radius:50%;box-shadow:0 8px 18px rgba(29,78,216,.18)}
-.mobile-menu-toggle{display:none;align-items:center;justify-content:center;width:40px;height:40px;flex:none;padding:0;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--ink);cursor:pointer}
-.menu-bars{display:grid;gap:4px}
-.menu-bars i{display:block;width:16px;height:2px;border-radius:2px;background:currentColor}
-.mobile-menu-toggle[aria-expanded="true"]{color:#A94140;border-color:var(--brand)}
 nav ul{display:flex;align-items:center;gap:10px;list-style:none;margin:0;padding:0}
 nav a{display:inline-flex;align-items:center;justify-content:center;padding:9px 14px;border-radius:10px;text-decoration:none;color:var(--muted);font-weight:600;font-size:14.5px;letter-spacing:-.01em;transition:all .2s ease}
 nav a:hover{color:var(--ink);background:rgba(29,78,216,.05);transform:translateY(-1px)}
 nav a:focus-visible{background:rgba(29,78,216,.06)}
 .actions{display:flex;align-items:center;gap:10px}
+.nav-toggle{display:none;align-items:center;justify-content:center;width:42px;height:42px;flex:none;padding:0;border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--ink);cursor:pointer}
+.nav-toggle-icon{display:grid;gap:4px}
+.nav-toggle-icon i{display:block;width:16px;height:1.5px;background:currentColor}
+.nav-toggle[aria-expanded="true"]{border-color:var(--brand);color:var(--brand)}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 .availability-pill{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:rgba(14,159,110,.06);border:1px solid rgba(14,159,110,.12);color:var(--ok);font-size:12.5px;font-weight:700;letter-spacing:.01em}
 .availability-pill::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 4px rgba(14,159,110,.12)}
 .logo, .btn, .pill, .mode, .proj, .sk, .cert, .education-panel, .links a, .item, .id-card, .announce a{transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease, background .2s ease, filter .2s ease}
@@ -80,9 +81,9 @@ nav a:focus-visible{background:rgba(29,78,216,.06)}
 .btn.g:hover{border-color:var(--ink);background:linear-gradient(180deg, var(--bg), var(--alt))}
 .btn.sm{padding:9px 16px;font-size:14.5px}
 .mode{width:40px;height:40px;border-radius:10px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer;font-size:16px}
-@media(max-width:900px){header{padding:8px 0}.bar{position:relative;height:64px;min-height:64px;flex-wrap:nowrap;gap:10px;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none}.mobile-menu-toggle{display:inline-flex;order:2;margin-left:auto}nav{display:none;position:absolute;top:calc(100% + 8px);left:0;right:0;z-index:35;order:4;width:auto;overflow:visible;padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--surface);box-shadow:0 14px 32px rgba(32,32,32,.14)}nav.is-open{display:block}nav ul{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));min-width:0;gap:2px}nav a{width:100%;justify-content:flex-start;padding:10px 12px;border-radius:5px;font-size:13px}.availability-pill{display:none}html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 88px)}}
+@media(max-width:900px){.bar{height:auto;min-height:72px;flex-wrap:wrap;padding:12px}.header{padding-inline:12px}nav{display:block;order:3;width:100%;overflow-x:auto;scrollbar-width:none}nav::-webkit-scrollbar{display:none}nav ul{justify-content:space-between;min-width:max-content;gap:4px}nav a{padding:8px 4px;font-size:12px}.availability-pill{display:none}html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 148px)}}
 @media(max-width:520px){.actions .g{display:none}}
-@media(max-width:360px){.bar{column-gap:6px}.logo{font-size:15px;gap:7px}.logo-avatar{width:30px;height:30px}.actions .btn{padding:8px 9px;font-size:11px}}
+@media(max-width:360px){.bar{column-gap:10px;padding-inline:10px}.logo{font-size:16px;gap:8px}.logo-avatar{width:32px;height:32px}.actions .btn{padding-inline:12px;font-size:13px}}
 
 /* hero */
 .hero{padding:84px 0 76px;background:radial-gradient(900px 400px at 85% -10%,var(--brand-soft),transparent 70%),linear-gradient(180deg, rgba(29,78,216,.03), transparent 70%)}
@@ -352,8 +353,8 @@ footer a.footer-logo:hover{color:var(--brand)!important;transform:none;box-shado
 .resume-dialog-header h2{font-size:20px;font-weight:600}
 .resume-close{display:grid;place-items:center;width:40px;height:40px;flex:none;border:1px solid var(--line);border-radius:7px;background:transparent;color:var(--ink);font:400 24px/1 var(--font);cursor:pointer}
 .resume-close:hover{background:var(--alt);color:var(--brand)}
-.resume-viewer{flex:1;min-height:0;overflow:auto;background:#E7EAEC;overscroll-behavior:contain}
-.resume-viewer img{display:block;width:100%;max-width:850px;height:auto;margin:0 auto}
+.resume-viewer{display:flex;flex:1;min-height:0;justify-content:center;overflow:auto;background:#E7EAEC}
+.resume-preview-image{display:block;width:min(100%,820px);height:max-content;flex:none;margin:0 auto;object-fit:contain;background:#fff}
 .resume-dialog-footer{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 20px;border-top:1px solid var(--line)}
 .resume-dialog-footer p{color:var(--muted);font-size:12px}
 .resume-dialog-actions{display:flex;flex-wrap:wrap;gap:8px}
@@ -365,11 +366,13 @@ footer a.footer-logo:hover{color:var(--brand)!important;transform:none;box-shado
 @media(max-width:900px){.proj{grid-template-columns:1fr}.proj.rev .shot{order:0}.shot{min-height:230px}.body{padding:26px 24px}.meta div{grid-template-columns:80px 1fr;gap:8px}.head h2{font-size:36px}}
 @media(max-width:700px){section{padding:68px 0}.workflow{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.workflow li:not(:last-child)::after{display:none}.hero .lead{font-size:15px}.skills{grid-template-columns:1fr}.skills .sk:last-child{grid-column:auto}.proof-grid .stat{padding:12px 9px}.proof-grid strong{font-size:20px}.proof-grid span{font-size:10px}.footer-main{grid-template-columns:1fr 1fr;gap:32px}.footer-brand{grid-column:1/-1}}
 @media(max-width:520px){.wrap{width:min(100% - 32px,1160px)}.hero{padding:54px 0}.hero h1{font-size:38px}.badge{font-size:10px}.id-card{padding:18px}.head h2,.cta h2{font-size:32px}.shot{min-height:190px;padding:24px}.body{padding:22px 18px}.meta div{grid-template-columns:72px 1fr;font-size:12px}.project-result{margin-top:12px}.cta{grid-template-columns:1fr;gap:26px;padding:6px 0}.proof-grid{gap:6px}.proof-grid .stat{padding:10px 7px}.footer-main{grid-template-columns:1fr;gap:28px;padding:42px 0 30px}.footer-brand{grid-column:auto}.footer-bottom{flex-direction:column;gap:8px}}
+@media(max-width:520px){.meta div{grid-template-columns:80px minmax(0,1fr);gap:10px}}
 @media(max-width:520px){footer .wrap{width:min(100% - 32px,1160px)}}
 @media(max-width:700px){footer .wrap>.footer-main{grid-template-columns:repeat(2,minmax(0,1fr));gap:32px}}
 @media(max-width:520px){footer .wrap>.footer-main{grid-template-columns:1fr;gap:28px;padding:42px 0 30px}}
 @media(max-width:520px){.resume-dialog{width:calc(100% - 20px);height:92vh;border-radius:8px}.resume-dialog-header{padding:13px 14px}.resume-dialog-footer{align-items:stretch;flex-direction:column;gap:9px;padding:11px 14px}.resume-dialog-actions{display:grid;grid-template-columns:1fr 1fr}.resume-dialog-actions .btn{padding:10px 9px;font-size:12px}}
-@media(max-width:360px){.meta div{grid-template-columns:80px 1fr}.learning-path{grid-template-columns:1fr}}
+@media(max-width:900px){header{padding:8px 0}.bar{min-height:60px;gap:8px 10px;padding:8px 0;border:0;border-radius:0;background:transparent;box-shadow:none}.nav-toggle{display:inline-flex;order:2}.actions{order:3;gap:6px;margin-left:auto}nav{display:none;order:4;width:100%;overflow:visible}.bar.menu-open nav{display:block}nav ul{display:grid;min-width:0;justify-content:stretch;gap:0;padding-top:8px;border-top:1px solid var(--line)}nav li+li{border-top:1px solid var(--line)}nav a{display:flex;width:100%;justify-content:flex-start;padding:12px 8px;font-size:14px}}
+@media(max-width:360px){.hero h1{font-size:34px;line-height:1.12}.learning-path{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 </style>
 </head>
@@ -378,13 +381,16 @@ footer a.footer-logo:hover{color:var(--brand)!important;transform:none;box-shado
 <header>
   <div class="wrap bar">
     <a class="logo" href="#top" aria-label="Vaidik Vala, home"><img class="logo-avatar" src="vaidik-avatar.jpg" alt="">Vaidik Vala</a>
-    <nav id="primary-nav" aria-label="Primary"><ul>
+    <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="primary-navigation">
+      <span class="nav-toggle-icon" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span class="sr-only">Menu</span>
+    </button>
+    <nav id="primary-navigation" aria-label="Primary"><ul>
       <li><a href="#projects">Projects</a></li>
       <li><a href="#skills">Skills</a></li>
       <li><a href="#experience">Background</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul></nav>
-    <button class="mobile-menu-toggle" type="button" aria-label="Open navigation menu" aria-controls="primary-nav" aria-expanded="false"><span class="menu-bars" aria-hidden="true"><i></i><i></i></span></button>
     <div class="actions">
       <span class="availability-pill">AI/ML Intern · EncodeDots</span>
       <button class="btn g sm" type="button" data-resume-open>Resume</button>
@@ -691,7 +697,7 @@ footer a.footer-logo:hover{color:var(--brand)!important;transform:none;box-shado
     <button class="resume-close" type="button" data-resume-close aria-label="Close resume preview">&times;</button>
   </div>
   <div class="resume-viewer">
-    <img src="resume-preview.png" alt="Preview of Vaidik Vala's one-page resume">
+    <img class="resume-preview-image" src="vaidik-resume-preview.png" alt="Full-page preview of Vaidik Vala's resume">
   </div>
   <div class="resume-dialog-footer">
     <p>AI/ML Intern · EncodeDots</p>
@@ -710,33 +716,20 @@ footer a.footer-logo:hover{color:var(--brand)!important;transform:none;box-shado
     o.observe(s);
   } else {s.classList.add('on');}
 
-  var menuButton=document.querySelector('.mobile-menu-toggle');
-  var primaryNav=document.getElementById('primary-nav');
-  function closePrimaryNav(){
-    primaryNav.classList.remove('is-open');
-    menuButton.setAttribute('aria-expanded','false');
-    menuButton.setAttribute('aria-label','Open navigation menu');
-  }
-  menuButton.addEventListener('click',function(){
-    var isOpen=menuButton.getAttribute('aria-expanded')==='true';
-    menuButton.setAttribute('aria-expanded',String(!isOpen));
-    menuButton.setAttribute('aria-label',isOpen?'Open navigation menu':'Close navigation menu');
-    primaryNav.classList.toggle('is-open',!isOpen);
-  });
-  primaryNav.addEventListener('click',function(event){if(event.target.closest('a'))closePrimaryNav();});
-  document.addEventListener('click',function(event){if(!event.target.closest('header'))closePrimaryNav();});
-
   var resumeDialog=document.getElementById('resume-dialog');
   document.querySelectorAll('[data-resume-open]').forEach(function(button){
     button.addEventListener('click',function(){resumeDialog.showModal();resumeDialog.querySelector('[data-resume-close]').focus();});
   });
   document.querySelector('[data-resume-close]').addEventListener('click',function(){resumeDialog.close();});
   resumeDialog.addEventListener('click',function(event){if(event.target===resumeDialog){resumeDialog.close();}});
-  document.addEventListener('keydown',function(event){
-    if(event.key!=='Escape')return;
-    if(resumeDialog.open){event.preventDefault();resumeDialog.close();}
-    if(primaryNav.classList.contains('is-open')){event.preventDefault();closePrimaryNav();}
-  },true);
+  document.addEventListener('keydown',function(event){if(event.key==='Escape'&&resumeDialog.open){event.preventDefault();resumeDialog.close();}},true);
+
+  var menuToggle=document.querySelector('.nav-toggle');
+  var headerBar=document.querySelector('.bar');
+  function closeMenu(){headerBar.classList.remove('menu-open');menuToggle.setAttribute('aria-expanded','false');}
+  menuToggle.addEventListener('click',function(){var isOpen=menuToggle.getAttribute('aria-expanded')==='true';headerBar.classList.toggle('menu-open',!isOpen);menuToggle.setAttribute('aria-expanded',String(!isOpen));});
+  document.querySelectorAll('#primary-navigation a').forEach(function(link){link.addEventListener('click',closeMenu);});
+  document.addEventListener('keydown',function(event){if(event.key==='Escape'&&menuToggle.getAttribute('aria-expanded')==='true'){closeMenu();}});
 })();
 </script>
 </body>
