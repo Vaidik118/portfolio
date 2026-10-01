@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -9,6 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
+  color-scheme:light;
   --bg:#FFFFFF; --alt:#F5F7FB; --surface:#FFFFFF; --surface-alt:#F5F7FB; --surface-highlight:rgba(255,255,255,.68); --header-bg:rgba(255,255,255,.72); --ink:#0B1730; --muted:#5A6780; --line:#E2E8F1;
   --brand:#1D4ED8; --brand-ink:#FFFFFF; --brand-soft:#EAF0FF; --ok:#0E9F6E;
   --navy:#0B1730; --navy-ink:#F1F5FF; --navy-muted:#A6B4CF; --shadow:0 1px 2px rgba(11,23,48,.06),0 8px 24px rgba(11,23,48,.06);
@@ -127,12 +128,6 @@ nav a:focus-visible{background:rgba(29,78,216,.06)}
 /* projects */
 .proj{display:grid;grid-template-columns:1.05fr 1fr;gap:0;background:linear-gradient(180deg,var(--surface),var(--surface-alt));border:1px solid var(--line);border-radius:22px;overflow:hidden;box-shadow:var(--shadow);margin-bottom:26px}
 .proj:last-child{margin-bottom:0}
-.proj.rev .shot{order:2}
-.shot{min-height:320px;display:grid;place-items:center;padding:34px}
-.s1{background:linear-gradient(145deg,#12308C,#2F5DF2)}
-.s2{background:linear-gradient(145deg,#0A5B58,#14A38F)}
-.s3{background:linear-gradient(145deg,#2B3350,#5B6AC4)}
-.shot svg{width:100%;max-width:400px;height:auto}
 .body{padding:38px 40px;display:flex;flex-direction:column}
 .body .tag{font-size:14px;font-weight:600;color:var(--brand)}
 .body h3{font-size:28px;font-weight:800;margin:8px 0 12px}
@@ -144,33 +139,43 @@ nav a:focus-visible{background:rgba(29,78,216,.06)}
 .chips{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:24px}
 .chips span{font-size:13px;font-weight:600;padding:5px 11px;border-radius:8px;background:var(--alt);border:1px solid var(--line)}
 .body .row{margin-top:auto}
-@media(max-width:900px){.proj{grid-template-columns:1fr}.proj.rev .shot{order:0}.shot{min-height:240px}.body{padding:28px 24px}.meta div{grid-template-columns:1fr;gap:2px}.head h2{font-size:36px}}
+@media(max-width:900px){.body{padding:28px 24px}.meta div{grid-template-columns:1fr;gap:2px}.head h2{font-size:36px}}
 
 /* skills */
-.skills{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.skills{display:grid;grid-template-columns:1fr;gap:14px}
 .sk{background:linear-gradient(180deg,var(--surface),var(--surface-alt));border:1px solid var(--line);border-radius:20px;padding:28px;box-shadow:0 8px 20px rgba(15,23,42,.02)}
+.sk{display:grid;grid-template-columns:minmax(220px,.7fr) minmax(0,1.3fr);column-gap:clamp(24px,5vw,64px);align-items:start}
 .sk h3{font-size:20px;margin-bottom:6px}
 .sk .d{color:var(--muted);font-size:14.5px;margin-bottom:20px}
+.sk h3,.sk .d{grid-column:1}
+.sk h3{grid-row:1}
+.sk .d{grid-row:2}
+.sk .skill-list{grid-column:2;grid-row:1 / span 2}
 .skill-list{list-style:none;margin:0;padding:0;display:grid;gap:12px}
 .skill-list li{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 12px;border-radius:12px;background:rgba(29,78,216,.02);border:1px solid rgba(148,163,184,.14)}
 .skill-list strong{font-size:14.5px;font-weight:700}
 .skill-list span{font-size:12px;color:var(--muted);padding:4px 8px;border-radius:999px;background:var(--bg);border:1px solid var(--line);font-weight:600}
 .topics{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.sk .topics{grid-column:2;grid-row:3;margin-top:12px}
 .topics .pill{background:linear-gradient(180deg,rgba(29,78,216,.045),var(--surface));border-color:rgba(29,78,216,.12)}
-@media(max-width:960px){.skills{grid-template-columns:1fr}}
+@media(max-width:900px){.sk{grid-template-columns:minmax(190px,.6fr) minmax(0,1.4fr)}}
 
 /* experience */
-.split{display:grid;grid-template-columns:.8fr 1.2fr;gap:64px}
-.tl{border-left:2px solid var(--line);padding-left:28px;display:grid;gap:34px}
-.item{position:relative;background:transparent;border:1px solid transparent;border-radius:16px;padding:18px 18px 18px 20px;transition:background .2s ease, border-color .2s ease, transform .2s ease, box-shadow .2s ease}
+.split{display:block}
+.tl{margin-top:44px;border:0;padding:0;display:block}
+.tl>h2{margin-bottom:20px;font-size:28px;font-weight:600}
+#experience .education-intro .head h2{font-size:28px;font-weight:600}
+.item{position:relative;margin-top:14px;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:24px;transition:background .2s ease, border-color .2s ease, transform .2s ease, box-shadow .2s ease}
+.item:first-of-type{margin-top:0}
 .item:hover{background:linear-gradient(180deg, rgba(29,78,216,.04), rgba(255,255,255,.9));border-color:var(--line);transform:translateY(-1px);box-shadow:0 10px 20px rgba(15,23,42,.04)}
-.item::before{content:"";position:absolute;left:-36px;top:23px;width:14px;height:14px;border-radius:50%;background:var(--brand);border:3px solid var(--bg)}
+.item::before{display:none}
 .item .when{display:inline-flex;align-items:center;padding:6px 10px;border-radius:10px;background:var(--brand-soft);border:1px solid rgba(29,78,216,.08);font-size:13px;font-weight:700;color:var(--brand);letter-spacing:.01em}
 .item h3{font-size:22px;margin:12px 0 2px}
 .item .where{color:var(--muted);font-weight:500;margin-bottom:10px}
 .item p{color:var(--muted)}
 .experience-points{margin:12px 0 0;padding-left:20px;display:grid;gap:10px;color:var(--muted)}
-.education-intro{display:flex;flex-direction:column;gap:22px}
+.education-intro{display:block}
+.education-intro .head{margin-bottom:18px}
 .education-panel{background:linear-gradient(180deg, rgba(29,78,216,.04), var(--surface));border:1px solid var(--line);border-radius:20px;padding:24px;box-shadow:var(--shadow)}
 .education-panel h3{font-size:22px;margin-bottom:18px}
 .education-points{list-style:none;margin:0;padding:0;display:grid;gap:12px}
@@ -178,7 +183,7 @@ nav a:focus-visible{background:rgba(29,78,216,.06)}
 .education-points li:last-child{border-bottom:0;padding-bottom:0}
 .education-points strong{font-size:15px}
 .education-points span{color:var(--muted);font-size:14.5px}
-@media(max-width:900px){.split{grid-template-columns:1fr;gap:40px}}
+@media(max-width:900px){.learning-path{grid-template-columns:repeat(3,minmax(0,1fr))}}
 
 /* certs */
 .certs{display:grid;grid-template-columns:1fr 1fr;gap:22px}
@@ -277,16 +282,10 @@ nav a:hover{background:var(--alt);transform:none}
 .workflow .step{grid-row:span 2;display:grid;place-items:center;width:30px;aspect-ratio:1;border-radius:50%;background:var(--brand-soft);color:#A94140;font-size:11px;font-weight:700}
 .workflow strong{font-size:13px;line-height:1.3}
 .workflow small{color:var(--muted);font-size:11px;line-height:1.4}
-.proj{grid-template-columns:1fr 1fr;margin-bottom:18px;border:1px solid var(--line);border-radius:10px;background:var(--surface);box-shadow:none;transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease}
+.proj{display:block;margin-bottom:18px;border:1px solid var(--line);border-radius:10px;background:var(--surface);box-shadow:none;transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease}
 .proj:hover{transform:translateY(-2px);border-color:#C4C9CE;box-shadow:0 12px 28px rgba(32,32,32,.07)}
-.shot{min-height:280px}
-.s1{background:linear-gradient(145deg,#193A7A,#547BD2)}
-.s2{background:linear-gradient(145deg,#175B51,#52A68A)}
-.s3{background:linear-gradient(145deg,#343C55,#8892BA)}
-.s4{background:#ECEFF1}
-.s5{background:#EEEAE7}
 .body{padding:30px}
-.body .tag{color:#A94140;font-size:11px;text-transform:uppercase;letter-spacing:.04em}
+.body .tag{color:#A94140;font-size:12px;font-weight:700;text-transform:none;letter-spacing:0}
 .body h3{font-size:24px;font-weight:600;letter-spacing:0}
 .body>p,.meta dd{color:var(--muted)}
 .project-result{display:flex;align-items:baseline;gap:10px;margin-top:14px;padding:12px 14px;border-left:3px solid var(--brand);background:var(--alt)}
@@ -310,7 +309,7 @@ nav a:hover{background:var(--alt);transform:none}
 .item:hover{background:var(--surface);border-color:var(--line)}
 .item::before{background:var(--brand)}
 .item .when{border-radius:5px;background:var(--brand-soft);border-color:transparent;color:#A94140}
-.learning-path{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px 14px;margin:14px 0 0;padding:0;list-style:none}
+.learning-path{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px 18px;margin:14px 0 0;padding:0;list-style:none}
 .learning-path li{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--line);font-size:13px;font-weight:600}
 .learning-path li span{display:grid;place-items:center;width:23px;height:23px;flex:none;border-radius:50%;background:var(--brand-soft);color:#A94140;font-size:10px}
 .education-panel{border-radius:9px;background:var(--surface);border-color:var(--line);box-shadow:none}
@@ -348,7 +347,7 @@ footer a.footer-logo:hover{color:var(--brand)!important;transform:none;box-shado
 .resume-dialog-header h2{font-size:20px;font-weight:600}
 .resume-close{display:grid;place-items:center;width:40px;height:40px;flex:none;border:1px solid var(--line);border-radius:7px;background:transparent;color:var(--ink);font:400 24px/1 var(--font);cursor:pointer}
 .resume-close:hover{background:var(--alt);color:var(--brand)}
-.resume-viewer{display:flex;flex:1;min-height:0;justify-content:center;overflow:auto;background:#E7EAEC}
+.resume-viewer{display:flex;flex:1;min-height:0;justify-content:center;overflow:auto;overscroll-behavior:contain;background:#E7EAEC}
 .resume-preview-image{display:block;width:min(100%,820px);height:max-content;flex:none;margin:0 auto;object-fit:contain;background:#fff}
 .resume-dialog-footer{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 20px;border-top:1px solid var(--line)}
 .resume-dialog-footer p{color:var(--muted);font-size:12px}
@@ -358,14 +357,15 @@ footer a.footer-logo:hover{color:var(--brand)!important;transform:none;box-shado
 .hero .wrap>div,.hero .id-card{animation:rise-in .55s both}
 .hero .id-card{animation-delay:.1s}
 @media(max-width:960px){.hero .wrap{grid-template-columns:1fr;gap:30px}.hero h1{font-size:46px}.skills{grid-template-columns:repeat(2,minmax(0,1fr))}.skills .sk:last-child{grid-column:1/-1}}
-@media(max-width:900px){.proj{grid-template-columns:1fr}.proj.rev .shot{order:0}.shot{min-height:230px}.body{padding:26px 24px}.meta div{grid-template-columns:80px 1fr;gap:8px}.head h2{font-size:36px}}
-@media(max-width:700px){section{padding:68px 0}.workflow{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.workflow li:not(:last-child)::after{display:none}.hero .lead{font-size:15px}.skills{grid-template-columns:1fr}.skills .sk:last-child{grid-column:auto}.proof-grid .stat{padding:12px 9px}.proof-grid strong{font-size:20px}.proof-grid span{font-size:10px}.footer-main{grid-template-columns:1fr 1fr;gap:32px}.footer-brand{grid-column:1/-1}}
-@media(max-width:520px){.wrap{width:min(100% - 32px,1160px)}.hero{padding:54px 0}.hero h1{font-size:38px}.badge{font-size:10px}.id-card{padding:18px}.head h2,.cta h2{font-size:32px}.shot{min-height:190px;padding:24px}.body{padding:22px 18px}.meta div{grid-template-columns:72px 1fr;font-size:12px}.project-result{margin-top:12px}.cta{grid-template-columns:1fr;gap:26px;padding:6px 0}.proof-grid{gap:6px}.proof-grid .stat{padding:10px 7px}.footer-main{grid-template-columns:1fr;gap:28px;padding:42px 0 30px}.footer-brand{grid-column:auto}.footer-bottom{flex-direction:column;gap:8px}}
+@media(max-width:900px){.body{padding:26px 24px}.meta div{grid-template-columns:80px 1fr;gap:8px}.head h2{font-size:36px}}
+@media(max-width:700px){section{padding:68px 0}.workflow{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.workflow li:not(:last-child)::after{display:none}.hero .lead{font-size:15px}.skills{grid-template-columns:1fr}.sk{grid-template-columns:1fr;row-gap:0;padding:20px}.sk h3,.sk .d,.sk .skill-list,.sk .topics{grid-column:1;grid-row:auto}.sk .d{margin-bottom:14px}.sk .topics{margin-top:12px}.skills .sk:last-child{grid-column:auto}.proof-grid .stat{padding:12px 9px}.proof-grid strong{font-size:20px}.proof-grid span{font-size:10px}.footer-main{grid-template-columns:1fr 1fr;gap:32px}.footer-brand{grid-column:1/-1}}
+@media(max-width:700px){#experience .education-intro .head{margin-bottom:14px}#experience .tl{margin-top:30px}#experience .tl>h2{font-size:24px}#experience .item{padding:18px}#experience .item::before{display:none}#experience .education-panel{padding:18px}.learning-path{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){.wrap{width:min(100% - 32px,1160px)}.hero{padding:54px 0}.hero h1{font-size:38px}.badge{font-size:10px}.id-card{padding:18px}.head h2,.cta h2{font-size:32px}.body{padding:22px 18px}.meta div{grid-template-columns:72px 1fr;font-size:12px}.project-result{margin-top:12px}.cta{grid-template-columns:1fr;gap:26px;padding:6px 0}.proof-grid{gap:6px}.proof-grid .stat{padding:10px 7px}.footer-main{grid-template-columns:1fr;gap:28px;padding:42px 0 30px}.footer-brand{grid-column:auto}.footer-bottom{flex-direction:column;gap:8px}}
 @media(max-width:520px){.meta div{grid-template-columns:80px minmax(0,1fr);gap:10px}}
 @media(max-width:520px){footer .wrap{width:min(100% - 32px,1160px)}}
 @media(max-width:700px){footer .wrap>.footer-main{grid-template-columns:repeat(2,minmax(0,1fr));gap:32px}}
 @media(max-width:520px){footer .wrap>.footer-main{grid-template-columns:1fr;gap:28px;padding:42px 0 30px}}
-@media(max-width:520px){.resume-dialog{width:calc(100% - 20px);height:92vh;border-radius:8px}.resume-dialog-header{padding:13px 14px}.resume-dialog-footer{align-items:stretch;flex-direction:column;gap:9px;padding:11px 14px}.resume-dialog-actions{display:grid;grid-template-columns:1fr 1fr}.resume-dialog-actions .btn{padding:10px 9px;font-size:12px}}
+@media(max-width:520px){.resume-dialog{width:calc(100% - 20px);height:min(88dvh,900px);max-height:calc(100dvh - 24px);border-radius:8px}.resume-dialog-header{padding:13px 14px}.resume-dialog-footer{align-items:stretch;flex-direction:column;gap:9px;padding:11px 14px}.resume-dialog-actions{display:grid;grid-template-columns:1fr}.resume-dialog-actions .btn{padding:10px 9px;font-size:12px}}
 @media(max-width:900px){header{padding:6px 0}.bar{height:auto;min-height:0;flex-wrap:wrap;gap:2px 10px;padding:6px 0;border:0;border-radius:0;background:transparent;box-shadow:none}.actions{order:2;gap:6px;margin-left:auto}nav{display:block;order:3;width:100%;overflow-x:auto;scrollbar-width:none}nav::-webkit-scrollbar{display:none}nav ul{display:flex;justify-content:space-between;min-width:max-content;gap:4px;padding:0;border:0}nav a{display:inline-flex;width:auto;justify-content:center;padding:8px 4px;font-size:12px;white-space:nowrap}.availability-pill{display:none}html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 120px)}}
 @media(max-width:360px){.hero h1{font-size:34px;line-height:1.12}.learning-path{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
@@ -377,9 +377,9 @@ footer a.footer-logo:hover{color:var(--brand)!important;transform:none;box-shado
   <div class="wrap bar">
     <a class="logo" href="#top" aria-label="Vaidik Vala, home"><img class="logo-avatar" src="vaidik-avatar.jpg" alt="">Vaidik Vala</a>
     <nav id="primary-navigation" aria-label="Primary"><ul>
+      <li><a href="#experience">Experience</a></li>
       <li><a href="#projects">Projects</a></li>
       <li><a href="#skills">Skills</a></li>
-      <li><a href="#experience">Background</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul></nav>
     <div class="actions">
@@ -416,10 +416,53 @@ footer a.footer-logo:hover{color:var(--brand)!important;transform:none;box-shado
   </div>
 </section>
 
+<section id="experience">
+  <div class="wrap split">
+    <div class="education-intro">
+      <div class="head">
+        <h2>Education</h2>
+        <p>Bachelor of Engineering in Computer Engineering, completed in 2025.</p>
+      </div>
+      <div class="education-panel">
+        <h3>Degree details</h3>
+        <ul class="education-points">
+          <li><strong>Bachelor of Engineering (B.E.)</strong><span>Computer Engineering</span></li>
+          <li><strong>Government Engineering College, Modasa</strong><span>2021–2025</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="tl">
+      <h2>Experience</h2>
+      <div class="item">
+        <span class="when">Current</span>
+        <h3>AI/ML Engineer Intern</h3>
+        <div class="where">EncodeDots</div>
+        <ul class="experience-points">
+          <li>Following a structured learning path across Python, data libraries, and machine-learning methods.</li>
+          <li>Building practical projects during the internship; new work will be added as it is completed.</li>
+        </ul>
+      </div>
+      <div class="item">
+        <span class="when">Learning path</span>
+        <h3>Python to Generative AI</h3>
+        <div class="where">A step-by-step progression through the AI/ML stack</div>
+        <ol class="learning-path">
+          <li><span>01</span>Python</li>
+          <li><span>02</span>NumPy & Pandas</li>
+          <li><span>03</span>scikit-learn</li>
+          <li><span>04</span>Machine learning</li>
+          <li><span>05</span>Deep learning</li>
+          <li><span>06</span>NLP</li>
+          <li><span>07</span>Generative AI</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="projects">
   <div class="wrap">
     <div class="head">
-      <span class="eyebrow">01 / Selected work</span>
       <h2>Featured projects</h2>
       <p>Deployed machine-learning applications, analytics work, and hands-on repositories where I continue building my Python and deep-learning foundations.</p>
     </div>
@@ -432,11 +475,24 @@ footer a.footer-logo:hover{color:var(--brand)!important;transform:none;box-shado
     </ol>
 
     <article class="proj">
-      <div class="shot s1" role="img" aria-label="Chart illustrating price prediction">
-        <svg viewBox="0 0 360 240" fill="none"><rect x="8" y="8" width="344" height="224" rx="18" fill="#fff" fill-opacity=".1" stroke="#fff" stroke-opacity=".25"/><text x="30" y="44" fill="#fff" font-family="sans-serif" font-size="14" font-weight="700">Estimated price</text><text x="30" y="76" fill="#fff" font-family="sans-serif" font-size="26" font-weight="800">₹ 4,85,000</text><path d="M30 190 L90 165 L150 172 L210 128 L270 116 L330 82" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><g fill="#fff"><circle cx="90" cy="165" r="6"/><circle cx="150" cy="172" r="6"/><circle cx="210" cy="128" r="6"/><circle cx="270" cy="116" r="6"/><circle cx="330" cy="82" r="8"/></g></svg>
-      </div>
       <div class="body">
-        <span class="tag">Machine Learning · Regression · Flask</span>
+        <span class="tag">Python</span>
+        <h3>Python Programming Practice</h3>
+        <p>A growing, structured set of Python exercises. Current modules cover fundamentals, conditionals, and loops, with a README roadmap for broader programming topics.</p>
+        <dl class="meta">
+          <div><dt>Current</dt><dd>Python basics, conditional statements, and loops.</dd></div>
+          <div><dt>Roadmap</dt><dd>Problem-solving, data structures, file handling, OOP, and more.</dd></div>
+        </dl>
+        <div class="chips"><span>Python</span><span>Programming fundamentals</span><span>Problem-solving</span></div>
+        <div class="row">
+          <a class="btn g sm" href="https://github.com/Vaidik118/python-programming-practice" target="_blank" rel="noopener">View repository</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="proj">
+      <div class="body">
+        <span class="tag">Machine Learning</span>
         <h3>Car Price Prediction System</h3>
         <p>A Flask app that estimates a used car’s market price from its specifications and serves live predictions on Render.</p>
         <div class="project-result"><strong>R² 0.90</strong><span>Linear regression model score</span></div>
@@ -453,12 +509,9 @@ footer a.footer-logo:hover{color:var(--brand)!important;transform:none;box-shado
       </div>
     </article>
 
-    <article class="proj rev">
-      <div class="shot s2" role="img" aria-label="Illustration of messages classified as spam or not spam">
-        <svg viewBox="0 0 360 240" fill="none"><rect x="30" y="34" width="220" height="60" rx="14" fill="#fff"/><rect x="50" y="54" width="130" height="8" rx="4" fill="#0A5B58" fill-opacity=".45"/><rect x="50" y="72" width="90" height="8" rx="4" fill="#0A5B58" fill-opacity=".25"/><rect x="262" y="48" width="70" height="30" rx="15" fill="#fff"/><text x="297" y="68" text-anchor="middle" fill="#0A5B58" font-family="sans-serif" font-size="14" font-weight="700">Not spam</text><rect x="110" y="128" width="220" height="60" rx="14" fill="#fff" fill-opacity=".2"/><rect x="130" y="148" width="140" height="8" rx="4" fill="#fff"/><rect x="130" y="166" width="100" height="8" rx="4" fill="#fff" fill-opacity=".7"/><rect x="28" y="142" width="70" height="30" rx="15" fill="#0B1730"/><text x="63" y="162" text-anchor="middle" fill="#fff" font-family="sans-serif" font-size="14" font-weight="700">Spam</text></svg>
-      </div>
+    <article class="proj">
       <div class="body">
-        <span class="tag">Natural Language Processing (NLP) · Text Classification</span>
+        <span class="tag">Machine Learning</span>
         <h3>SMS/Email Spam Classifier</h3>
         <p>An NLP app that classifies SMS and email messages as spam or legitimate, available for browser-based testing.</p>
         <div class="project-result"><strong>TF-IDF</strong><span>Text features for spam classification</span></div>
@@ -476,11 +529,8 @@ footer a.footer-logo:hover{color:var(--brand)!important;transform:none;box-shado
     </article>
 
     <article class="proj">
-      <div class="shot s3" role="img" aria-label="Illustration of an e-commerce sales dashboard">
-        <svg viewBox="0 0 360 240" fill="none"><rect x="22" y="24" width="316" height="192" rx="16" fill="#fff" fill-opacity=".1" stroke="#fff" stroke-opacity=".35"/><path d="M44 64h272M44 106h272" stroke="#fff" stroke-opacity=".3"/><text x="44" y="51" fill="#fff" font-family="sans-serif" font-size="14" font-weight="700">SALES OVERVIEW</text><rect x="48" y="78" width="74" height="18" rx="5" fill="#fff" fill-opacity=".8"/><rect x="143" y="78" width="74" height="18" rx="5" fill="#fff" fill-opacity=".55"/><rect x="238" y="78" width="74" height="18" rx="5" fill="#fff" fill-opacity=".35"/><path d="M56 188v-34h28v34M104 188v-58h28v58M152 188v-44h28v44M200 188v-76h28v76M248 188v-62h28v62M296 188v-92h18v92" fill="#fff" fill-opacity=".78"/><path d="M46 190h270" stroke="#fff" stroke-width="2" stroke-opacity=".7"/></svg>
-      </div>
       <div class="body">
-        <span class="tag">Power BI · Data Analytics · Business Intelligence</span>
+        <span class="tag">Power BI</span>
         <h3>E-commerce Sales Dashboard</h3>
         <p>An interactive Power BI dashboard for exploring e-commerce performance and supporting business reporting.</p>
         <div class="project-result"><strong>4 KPIs</strong><span>Sales · profit · quantity · order value</span></div>
@@ -492,31 +542,9 @@ footer a.footer-logo:hover{color:var(--brand)!important;transform:none;box-shado
       </div>
     </article>
 
-    <article class="proj rev">
-      <div class="shot s4" role="img" aria-label="Python programming practice modules">
-        <svg viewBox="0 0 360 240" fill="none"><rect x="16" y="16" width="328" height="208" rx="14" fill="#fff" stroke="#DDE1E5"/><circle cx="38" cy="39" r="4" fill="#E35D5B"/><circle cx="52" cy="39" r="4" fill="#E6B65C"/><circle cx="66" cy="39" r="4" fill="#6EA88C"/><text x="34" y="72" fill="#202020" font-family="Poppins,sans-serif" font-size="13" font-weight="700">PYTHON / PRACTICE</text><rect x="34" y="88" width="292" height="1" fill="#E2E6EA"/><text x="38" y="116" fill="#A94140" font-family="monospace" font-size="12">01</text><text x="70" y="116" fill="#343B42" font-family="monospace" font-size="12">language fundamentals</text><text x="38" y="146" fill="#A94140" font-family="monospace" font-size="12">02</text><text x="70" y="146" fill="#343B42" font-family="monospace" font-size="12">conditions and loops</text><text x="38" y="176" fill="#A94140" font-family="monospace" font-size="12">03</text><text x="70" y="176" fill="#343B42" font-family="monospace" font-size="12">problem-solving practice</text><rect x="34" y="194" width="154" height="6" rx="3" fill="#FCEAE9"/></svg>
-      </div>
-      <div class="body">
-        <span class="tag">Learning repository · Python</span>
-        <h3>Python Programming Practice</h3>
-        <p>A growing, structured set of Python exercises. Current modules cover fundamentals, conditionals, and loops, with a README roadmap for broader programming topics.</p>
-        <dl class="meta">
-          <div><dt>Current</dt><dd>Python basics, conditional statements, and loops.</dd></div>
-          <div><dt>Roadmap</dt><dd>Problem-solving, data structures, file handling, OOP, and more.</dd></div>
-        </dl>
-        <div class="chips"><span>Python</span><span>Programming fundamentals</span><span>Problem-solving</span></div>
-        <div class="row">
-          <a class="btn g sm" href="https://github.com/Vaidik118/python-programming-practice" target="_blank" rel="noopener">View repository</a>
-        </div>
-      </div>
-    </article>
-
     <article class="proj">
-      <div class="shot s5" role="img" aria-label="Neural network nodes illustrating deep-learning studies">
-        <svg viewBox="0 0 360 240" fill="none"><rect x="16" y="16" width="328" height="208" rx="14" fill="#fff" stroke="#E0DAD6"/><text x="34" y="48" fill="#202020" font-family="Poppins,sans-serif" font-size="13" font-weight="700">DEEP LEARNING / NOTES</text><text x="34" y="69" fill="#70777D" font-family="Poppins,sans-serif" font-size="10">perceptrons · backpropagation · neural networks</text><g stroke="#C7CCD1" stroke-width="2"><path d="M92 102 172 94M92 102 172 144M92 102 172 194M92 148 172 94M92 148 172 144M92 148 172 194M92 194 172 94M92 194 172 144M92 194 172 194M190 94 276 144M190 144 276 144M190 194 276 144"/></g><g fill="#FCEAE9" stroke="#E35D5B" stroke-width="2"><circle cx="84" cy="102" r="12"/><circle cx="84" cy="148" r="12"/><circle cx="84" cy="194" r="12"/><circle cx="180" cy="94" r="12"/><circle cx="180" cy="144" r="12"/><circle cx="180" cy="194" r="12"/><circle cx="284" cy="144" r="14"/></g><text x="60" y="218" fill="#70777D" font-family="Poppins,sans-serif" font-size="9">INPUTS</text><text x="156" y="218" fill="#70777D" font-family="Poppins,sans-serif" font-size="9">HIDDEN LAYER</text><text x="270" y="218" fill="#70777D" font-family="Poppins,sans-serif" font-size="9">OUTPUT</text></svg>
-      </div>
       <div class="body">
-        <span class="tag">Learning repository · Deep learning</span>
+        <span class="tag">Deep Learning</span>
         <h3>Deep Learning Studies</h3>
         <p>A notebook-based learning repository exploring neural-network fundamentals and practical classification and regression examples.</p>
         <dl class="meta">
@@ -535,7 +563,6 @@ footer a.footer-logo:hover{color:var(--brand)!important;transform:none;box-shado
 <section id="skills" class="alt">
   <div class="wrap" id="skillwrap">
     <div class="head">
-      <span class="eyebrow">02 / Toolkit</span>
       <h2>Technical skills</h2>
       <p>Tools and methods used across my machine learning and data analysis projects.</p>
     </div>
@@ -584,56 +611,10 @@ footer a.footer-logo:hover{color:var(--brand)!important;transform:none;box-shado
   </div>
 </section>
 
-<section id="experience">
-  <div class="wrap split">
-    <div class="education-intro">
-      <div class="head" style="margin-bottom:0">
-        <span class="eyebrow">03 / Background</span>
-        <h2>Education</h2>
-        <p>Bachelor of Engineering in Computer Engineering, completed in 2025.</p>
-      </div>
-      <div class="education-panel">
-        <h3>Degree details</h3>
-        <ul class="education-points">
-          <li><strong>Bachelor of Engineering (B.E.)</strong><span>Computer Engineering</span></li>
-          <li><strong>Government Engineering College, Modasa</strong><span>2021–2025</span></li>
-        </ul>
-      </div>
-    </div>
-    <div class="tl">
-      <h2>Internship Experience</h2>
-      <div class="item">
-        <span class="when">Current</span>
-        <h3>AI/ML Intern</h3>
-        <div class="where">EncodeDots</div>
-        <ul class="experience-points">
-          <li>Following a structured learning path across Python, data libraries, and machine-learning methods.</li>
-          <li>Building practical projects during the internship; new work will be added as it is completed.</li>
-        </ul>
-      </div>
-      <div class="item">
-        <span class="when">Learning path</span>
-        <h3>Python to Generative AI</h3>
-        <div class="where">A step-by-step progression through the AI/ML stack</div>
-        <ol class="learning-path">
-          <li><span>01</span>Python</li>
-          <li><span>02</span>NumPy & Pandas</li>
-          <li><span>03</span>scikit-learn</li>
-          <li><span>04</span>Machine learning</li>
-          <li><span>05</span>Deep learning</li>
-          <li><span>06</span>NLP</li>
-          <li><span>07</span>Generative AI</li>
-        </ol>
-      </div>
-    </div>
-  </div>
-</section>
-
 <section id="contact">
   <div class="wrap">
     <div class="cta">
       <div>
-        <span class="eyebrow">04 / Get in touch</span>
         <h2>Contact</h2>
         <p class="sub">Open to AI/ML Engineer, Data Analyst, and Python Developer roles. Let’s talk about building useful, data-driven products.</p>
         <div class="row">
@@ -693,8 +674,7 @@ footer a.footer-logo:hover{color:var(--brand)!important;transform:none;box-shado
   <div class="resume-dialog-footer">
     <p>AI/ML Intern · EncodeDots</p>
     <div class="resume-dialog-actions">
-      <a class="btn p sm" href="vaidik_resume.pdf" download>Download PDF</a>
-      <a class="btn g sm" href="vaidik_resume.pdf">Open full page</a>
+      <a class="btn p sm" href="vaidik_resume.pdf" download="Vaidik-Vala-Resume.pdf">Download PDF</a>
     </div>
   </div>
 </dialog>
@@ -708,8 +688,25 @@ footer a.footer-logo:hover{color:var(--brand)!important;transform:none;box-shado
   } else {s.classList.add('on');}
 
   var resumeDialog=document.getElementById('resume-dialog');
+  var previousRootStyle;
+  var resumeScrollY=0;
+  var resumeTrigger;
   document.querySelectorAll('[data-resume-open]').forEach(function(button){
-    button.addEventListener('click',function(){resumeDialog.showModal();resumeDialog.querySelector('[data-resume-close]').focus();});
+    button.addEventListener('click',function(){
+      resumeTrigger=button;
+      resumeScrollY=window.scrollY;
+      previousRootStyle=document.documentElement.getAttribute('style');
+      document.documentElement.style.overflow='hidden';
+      resumeDialog.showModal();
+      resumeDialog.querySelector('[data-resume-close]').focus({preventScroll:true});
+      window.scrollTo({left:0,top:resumeScrollY,behavior:'instant'});
+    });
+  });
+  resumeDialog.addEventListener('close',function(){
+    if(previousRootStyle===null){document.documentElement.removeAttribute('style');}
+    else{document.documentElement.setAttribute('style',previousRootStyle);}
+    if(resumeTrigger){resumeTrigger.focus({preventScroll:true});}
+    window.scrollTo({left:0,top:resumeScrollY,behavior:'instant'});
   });
   document.querySelector('[data-resume-close]').addEventListener('click',function(){resumeDialog.close();});
   resumeDialog.addEventListener('click',function(event){if(event.target===resumeDialog){resumeDialog.close();}});
