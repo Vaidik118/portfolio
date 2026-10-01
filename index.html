@@ -65,6 +65,12 @@ nav ul{display:flex;align-items:center;gap:10px;list-style:none;margin:0;padding
 nav a{display:inline-flex;align-items:center;justify-content:center;padding:9px 14px;border-radius:10px;text-decoration:none;color:var(--muted);font-weight:600;font-size:14.5px;letter-spacing:-.01em;transition:all .2s ease}
 nav a:hover{color:var(--ink);background:rgba(29,78,216,.05);transform:translateY(-1px)}
 nav a:focus-visible{background:rgba(29,78,216,.06)}
+.nav-toggle{display:none;align-items:center;justify-content:center;width:42px;height:42px;flex:none;border:1px solid var(--line);border-radius:7px;background:transparent;color:var(--ink);cursor:pointer}
+.nav-toggle-icon{display:grid;gap:4px;width:16px}
+.nav-toggle-icon i{display:block;width:16px;height:1.5px;background:currentColor;transition:transform .18s ease,opacity .18s ease}
+.nav-toggle[aria-expanded="true"] .nav-toggle-icon i:first-child{transform:translateY(5.5px) rotate(45deg)}
+.nav-toggle[aria-expanded="true"] .nav-toggle-icon i:nth-child(2){opacity:0}
+.nav-toggle[aria-expanded="true"] .nav-toggle-icon i:last-child{transform:translateY(-5.5px) rotate(-45deg)}
 .actions{display:flex;align-items:center;gap:10px}
 .availability-pill{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:rgba(14,159,110,.06);border:1px solid rgba(14,159,110,.12);color:var(--ok);font-size:12.5px;font-weight:700;letter-spacing:.01em}
 .availability-pill::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 4px rgba(14,159,110,.12)}
@@ -87,6 +93,7 @@ nav a:focus-visible{background:rgba(29,78,216,.06)}
 .badge{display:inline-block;font-size:14px;font-weight:700;letter-spacing:.02em;color:var(--brand);background:var(--brand-soft);padding:8px 16px;border-radius:999px;margin-bottom:24px;box-shadow:inset 0 0 0 1px rgba(29,78,216,.05)}
 .hero h1{font-size:62px;font-weight:800;max-width:660px;letter-spacing:-.055em}
 .hero .lead{font-size:19px;color:var(--muted);margin:24px 0 34px;max-width:36em}
+.hero-stack{margin-top:18px;color:var(--muted);font-size:13px;font-weight:600}
 .row{display:flex;flex-wrap:wrap;gap:12px}
 .tools{margin-top:40px;display:flex;flex-wrap:wrap;gap:10px 10px;align-items:center}
 .tools span{font-size:14px;color:var(--muted);margin-right:6px}
@@ -113,12 +120,12 @@ nav a:focus-visible{background:rgba(29,78,216,.06)}
 
 /* metrics */
 .metrics{padding:0;border-block:1px solid var(--line)}
-.metrics .wrap{display:grid;grid-template-columns:repeat(4,1fr)}
+.metrics .wrap{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
 .metric{padding:36px 24px;border-left:1px solid var(--line)}
 .metric:first-child{border-left:0;padding-left:0}
 .metric b{display:block;font-size:40px;font-weight:800;letter-spacing:-.03em;line-height:1}
 .metric span{display:block;margin-top:10px;color:var(--muted);font-size:15px}
-@media(max-width:800px){.metrics .wrap{grid-template-columns:1fr 1fr}.metric{border-left:0;padding:26px 0;border-top:1px solid var(--line)}.metric:nth-child(-n+2){border-top:0}}
+@media(max-width:800px){.metrics .wrap{grid-template-columns:repeat(3,minmax(0,1fr))}.metric{padding:18px 8px;border-left:1px solid var(--line);border-top:0}.metric:first-child{border-left:0}.metric b{font-size:26px}.metric span{font-size:12px}}
 
 /* headings */
 .head{max-width:660px;margin-bottom:48px}
@@ -145,18 +152,23 @@ nav a:focus-visible{background:rgba(29,78,216,.06)}
 .skills{display:grid;grid-template-columns:1fr;gap:14px}
 .sk{background:linear-gradient(180deg,var(--surface),var(--surface-alt));border:1px solid var(--line);border-radius:20px;padding:28px;box-shadow:0 8px 20px rgba(15,23,42,.02)}
 .sk{display:grid;grid-template-columns:minmax(220px,.7fr) minmax(0,1.3fr);column-gap:clamp(24px,5vw,64px);align-items:start}
+.sk>summary{grid-column:1;grid-row:1;position:relative;list-style:none;cursor:pointer}
+.sk>summary::-webkit-details-marker{display:none}
+.sk>summary::after{content:"+";position:absolute;top:0;right:0;color:var(--brand);font-size:20px;line-height:1}
+.sk[open]>summary::after{content:"-"}
+.sk>summary h3{margin:0 26px 6px 0}
+.sk>summary .d{margin:0}
+.sk-content{grid-column:2;grid-row:1;min-width:0}
 .sk h3{font-size:20px;margin-bottom:6px}
 .sk .d{color:var(--muted);font-size:14.5px;margin-bottom:20px}
-.sk h3,.sk .d{grid-column:1}
-.sk h3{grid-row:1}
-.sk .d{grid-row:2}
-.sk .skill-list{grid-column:2;grid-row:1 / span 2}
 .skill-list{list-style:none;margin:0;padding:0;display:grid;gap:12px}
 .skill-list li{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 12px;border-radius:12px;background:rgba(29,78,216,.02);border:1px solid rgba(148,163,184,.14)}
 .skill-list strong{font-size:14.5px;font-weight:700}
 .skill-list span{font-size:12px;color:var(--muted);padding:4px 8px;border-radius:999px;background:var(--bg);border:1px solid var(--line);font-weight:600}
 .topics{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
-.sk .topics{grid-column:2;grid-row:3;margin-top:12px}
+.sk .topics{margin-top:12px}
+.current-focus{display:flex;align-items:baseline;gap:12px;margin:22px 0 0;padding-top:16px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+.current-focus strong{color:var(--ink)}
 .topics .pill{background:linear-gradient(180deg,rgba(29,78,216,.045),var(--surface));border-color:rgba(29,78,216,.12)}
 @media(max-width:900px){.sk{grid-template-columns:minmax(190px,.6fr) minmax(0,1.4fr)}}
 
@@ -282,9 +294,12 @@ nav a:hover{background:var(--alt);transform:none}
 .workflow .step{grid-row:span 2;display:grid;place-items:center;width:30px;aspect-ratio:1;border-radius:50%;background:var(--brand-soft);color:#A94140;font-size:11px;font-weight:700}
 .workflow strong{font-size:13px;line-height:1.3}
 .workflow small{color:var(--muted);font-size:11px;line-height:1.4}
-.proj{display:block;margin-bottom:18px;border:1px solid var(--line);border-radius:10px;background:var(--surface);box-shadow:none;transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease}
+.project-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:start;gap:18px}
+.proj{display:flex;min-width:0;flex-direction:column;margin:0;border:1px solid var(--line);border-radius:10px;background:var(--surface);box-shadow:none;transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease}
 .proj:hover{transform:translateY(-2px);border-color:#C4C9CE;box-shadow:0 12px 28px rgba(32,32,32,.07)}
+.project-preview{display:block;width:100%;height:230px;object-fit:cover;object-position:center bottom;background:var(--alt);border-bottom:1px solid var(--line)}
 .body{padding:30px}
+.proj .body{flex:1}
 .body .tag{color:#A94140;font-size:12px;font-weight:700;text-transform:none;letter-spacing:0}
 .body h3{font-size:24px;font-weight:600;letter-spacing:0}
 .body>p,.meta dd{color:var(--muted)}
@@ -292,6 +307,12 @@ nav a:hover{background:var(--alt);transform:none}
 .project-result strong{font-family:"Poppins",sans-serif;font-size:22px;line-height:1.2}
 .project-result span{color:var(--muted);font-size:12px}
 .meta{margin:14px 0;gap:0}
+.project-details{margin:10px 0 14px}
+.project-details>summary{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px 0;border-block:1px solid var(--line);color:var(--ink);font-size:12px;font-weight:700;list-style:none;cursor:pointer}
+.project-details>summary::-webkit-details-marker{display:none}
+.project-details>summary::after{content:"+";font-size:18px;font-weight:400;line-height:1}
+.project-details[open]>summary::after{content:"-"}
+.project-details .meta{margin:10px 0 0}
 .meta div{grid-template-columns:80px 1fr;gap:8px;padding:8px 0;border-top:1px solid var(--line);font-size:13px}
 .meta dt{color:var(--ink)}
 .chips{gap:6px;margin-bottom:18px}
@@ -357,16 +378,18 @@ footer a.footer-logo:hover{color:var(--brand)!important;transform:none;box-shado
 .hero .wrap>div,.hero .id-card{animation:rise-in .55s both}
 .hero .id-card{animation-delay:.1s}
 @media(max-width:960px){.hero .wrap{grid-template-columns:1fr;gap:30px}.hero h1{font-size:46px}.skills{grid-template-columns:repeat(2,minmax(0,1fr))}.skills .sk:last-child{grid-column:1/-1}}
-@media(max-width:900px){.body{padding:26px 24px}.meta div{grid-template-columns:80px 1fr;gap:8px}.head h2{font-size:36px}}
-@media(max-width:700px){section{padding:68px 0}.workflow{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.workflow li:not(:last-child)::after{display:none}.hero .lead{font-size:15px}.skills{grid-template-columns:1fr}.sk{grid-template-columns:1fr;row-gap:0;padding:20px}.sk h3,.sk .d,.sk .skill-list,.sk .topics{grid-column:1;grid-row:auto}.sk .d{margin-bottom:14px}.sk .topics{margin-top:12px}.skills .sk:last-child{grid-column:auto}.proof-grid .stat{padding:12px 9px}.proof-grid strong{font-size:20px}.proof-grid span{font-size:10px}.footer-main{grid-template-columns:1fr 1fr;gap:32px}.footer-brand{grid-column:1/-1}}
+@media(max-width:900px){.project-grid{grid-template-columns:1fr}.body{padding:26px 24px}.meta div{grid-template-columns:80px 1fr;gap:8px}.head h2{font-size:36px}}
+@media(max-width:700px){section{padding:68px 0}.workflow{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.workflow li:not(:last-child)::after{display:none}.hero .lead{font-size:15px}.skills{grid-template-columns:1fr}.sk{grid-template-columns:1fr;row-gap:0;padding:20px}.sk>summary,.sk-content{grid-column:1;grid-row:auto}.sk>summary{padding-right:28px}.sk .skill-list,.sk .topics{grid-column:auto;grid-row:auto}.sk .d{margin-bottom:0}.sk .topics{margin-top:12px}.skills .sk:last-child{grid-column:auto}.proof-grid .stat{padding:12px 9px}.proof-grid strong{font-size:20px}.proof-grid span{font-size:10px}.footer-main{grid-template-columns:1fr 1fr;gap:32px}.footer-brand{grid-column:1/-1}}
 @media(max-width:700px){#experience .education-intro .head{margin-bottom:14px}#experience .tl{margin-top:30px}#experience .tl>h2{font-size:24px}#experience .item{padding:18px}#experience .item::before{display:none}#experience .education-panel{padding:18px}.learning-path{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:520px){.wrap{width:min(100% - 32px,1160px)}.hero{padding:54px 0}.hero h1{font-size:38px}.badge{font-size:10px}.id-card{padding:18px}.head h2,.cta h2{font-size:32px}.body{padding:22px 18px}.meta div{grid-template-columns:72px 1fr;font-size:12px}.project-result{margin-top:12px}.cta{grid-template-columns:1fr;gap:26px;padding:6px 0}.proof-grid{gap:6px}.proof-grid .stat{padding:10px 7px}.footer-main{grid-template-columns:1fr;gap:28px;padding:42px 0 30px}.footer-brand{grid-column:auto}.footer-bottom{flex-direction:column;gap:8px}}
+@media(max-width:520px){.wrap{width:min(100% - 32px,1160px)}.hero{padding:54px 0}.hero h1{font-size:38px}.badge{font-size:10px}.id-card{padding:18px}.head h2,.cta h2{font-size:32px}.body{padding:22px 18px}.project-preview{height:190px}.meta div{grid-template-columns:72px 1fr;font-size:12px}.project-result{margin-top:12px}.cta{grid-template-columns:1fr;gap:26px;padding:6px 0}.proof-grid{gap:6px}.proof-grid .stat{padding:10px 7px}.footer-main{grid-template-columns:1fr;gap:28px;padding:42px 0 30px}.footer-brand{grid-column:auto}.footer-bottom{flex-direction:column;gap:8px}}
+@media(max-width:520px){.hero{padding:30px 0 24px}.hero .wrap{gap:18px}.hero .badge{margin-bottom:12px}.hero h1{font-size:34px}.hero .lead{margin:12px 0 16px;font-size:14px;line-height:1.5}.hero .id-card{padding:14px}.hero .id-top{gap:12px;padding-bottom:12px}.hero .avatar{width:52px;height:52px}.hero .facts div{padding:7px 0;font-size:13px}.current-focus{align-items:flex-start;flex-direction:column;gap:4px}}
 @media(max-width:520px){.meta div{grid-template-columns:80px minmax(0,1fr);gap:10px}}
 @media(max-width:520px){footer .wrap{width:min(100% - 32px,1160px)}}
 @media(max-width:700px){footer .wrap>.footer-main{grid-template-columns:repeat(2,minmax(0,1fr));gap:32px}}
 @media(max-width:520px){footer .wrap>.footer-main{grid-template-columns:1fr;gap:28px;padding:42px 0 30px}}
 @media(max-width:520px){.resume-dialog{width:calc(100% - 20px);height:min(88dvh,900px);max-height:calc(100dvh - 24px);border-radius:8px}.resume-dialog-header{padding:13px 14px}.resume-dialog-footer{align-items:stretch;flex-direction:column;gap:9px;padding:11px 14px}.resume-dialog-actions{display:grid;grid-template-columns:1fr}.resume-dialog-actions .btn{padding:10px 9px;font-size:12px}}
 @media(max-width:900px){header{padding:6px 0}.bar{height:auto;min-height:0;flex-wrap:wrap;gap:2px 10px;padding:6px 0;border:0;border-radius:0;background:transparent;box-shadow:none}.actions{order:2;gap:6px;margin-left:auto}nav{display:block;order:3;width:100%;overflow-x:auto;scrollbar-width:none}nav::-webkit-scrollbar{display:none}nav ul{display:flex;justify-content:space-between;min-width:max-content;gap:4px;padding:0;border:0}nav a{display:inline-flex;width:auto;justify-content:center;padding:8px 4px;font-size:12px;white-space:nowrap}.availability-pill{display:none}html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 120px)}}
+@media(max-width:900px){.nav-toggle{display:inline-flex;order:2;margin-left:auto}.actions{order:3;margin-left:0}nav{display:none;order:4;width:100%;overflow:visible;scrollbar-width:auto}header[data-nav-open] nav{display:block}nav ul{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));justify-content:stretch;min-width:0;gap:4px}nav a{width:100%;justify-content:flex-start;padding:10px;white-space:normal}}
 @media(max-width:360px){.hero h1{font-size:34px;line-height:1.12}.learning-path{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 </style>
@@ -376,7 +399,10 @@ footer a.footer-logo:hover{color:var(--brand)!important;transform:none;box-shado
 <header>
   <div class="wrap bar">
     <a class="logo" href="#top" aria-label="Vaidik Vala, home"><img class="logo-avatar" src="vaidik-avatar.jpg" alt="">Vaidik Vala</a>
+    <button class="nav-toggle" type="button" aria-controls="primary-navigation" aria-expanded="false" aria-label="Open navigation" title="Open navigation"><span class="nav-toggle-icon" aria-hidden="true"><i></i><i></i><i></i></span></button>
     <nav id="primary-navigation" aria-label="Primary"><ul>
+      <li><a href="#top">Home</a></li>
+      <li><a href="#about">About</a></li>
       <li><a href="#experience">Experience</a></li>
       <li><a href="#projects">Projects</a></li>
       <li><a href="#skills">Skills</a></li>
@@ -393,13 +419,15 @@ footer a.footer-logo:hover{color:var(--brand)!important;transform:none;box-shado
 <main id="top">
 <section class="hero">
   <div class="wrap">
-    <div>
-      <span class="badge">AI Engineer</span>
-      <h1>I build machine learning applications from model to deployment.</h1>
-      <p class="lead">Currently an AI/ML Intern at EncodeDots, progressing from Python and data libraries through machine learning, deep learning, NLP, and generative AI. I apply that learning to practical projects as they take shape.</p>
+    <div id="about">
+      <span class="badge">AI/ML Engineer</span>
+      <h1>I build and deploy practical machine learning applications.</h1>
+      <p class="lead">Computer Engineering graduate and AI/ML Intern at EncodeDots. I use Python, Scikit-learn, NLP, and SQL to turn data into working applications.</p>
+      <p class="hero-stack">Python · Machine Learning · NLP · Deep Learning · SQL</p>
       <div class="row">
         <a class="btn p" href="#projects">View projects</a>
-        <a class="btn g" href="https://github.com/Vaidik118" target="_blank" rel="noopener">Explore GitHub</a>
+        <a class="btn g" href="vaidik_resume.pdf" download="Vaidik-Vala-Resume.pdf">Download resume</a>
+        <a class="btn g" href="https://github.com/Vaidik118" target="_blank" rel="noopener">GitHub</a>
       </div>
     </div>
     <aside class="id-card" aria-label="Profile summary">
@@ -413,6 +441,14 @@ footer a.footer-logo:hover{color:var(--brand)!important;transform:none;box-shado
         <div><dt>Focus</dt><dd class="ok">ML systems • analytics • deployment</dd></div>
       </dl>
     </aside>
+  </div>
+</section>
+
+<section class="metrics" aria-label="Portfolio overview">
+  <div class="wrap">
+    <div class="metric"><b>5</b><span>Featured projects</span></div>
+    <div class="metric"><b>2</b><span>Deployed ML apps</span></div>
+    <div class="metric"><b>1</b><span>Power BI dashboard</span></div>
   </div>
 </section>
 
@@ -435,26 +471,12 @@ footer a.footer-logo:hover{color:var(--brand)!important;transform:none;box-shado
       <h2>Experience</h2>
       <div class="item">
         <span class="when">Current</span>
-        <h3>AI/ML Engineer Intern</h3>
+        <h3>AI/ML Intern</h3>
         <div class="where">EncodeDots</div>
         <ul class="experience-points">
-          <li>Following a structured learning path across Python, data libraries, and machine-learning methods.</li>
-          <li>Building practical projects during the internship; new work will be added as it is completed.</li>
+          <li>Applying Python and data tools to practical machine-learning project work.</li>
+          <li>Building portfolio applications that cover data preparation, model development, and deployment.</li>
         </ul>
-      </div>
-      <div class="item">
-        <span class="when">Learning path</span>
-        <h3>Python to Generative AI</h3>
-        <div class="where">A step-by-step progression through the AI/ML stack</div>
-        <ol class="learning-path">
-          <li><span>01</span>Python</li>
-          <li><span>02</span>NumPy & Pandas</li>
-          <li><span>03</span>scikit-learn</li>
-          <li><span>04</span>Machine learning</li>
-          <li><span>05</span>Deep learning</li>
-          <li><span>06</span>NLP</li>
-          <li><span>07</span>Generative AI</li>
-        </ol>
       </div>
     </div>
   </div>
@@ -474,15 +496,19 @@ footer a.footer-logo:hover{color:var(--brand)!important;transform:none;box-shado
       <li><span class="step">04</span><strong>Deploy</strong><small>Ship a usable app</small></li>
     </ol>
 
+    <div class="project-grid">
     <article class="proj">
       <div class="body">
         <span class="tag">Python</span>
         <h3>Python Programming Practice</h3>
         <p>A growing, structured set of Python exercises. Current modules cover fundamentals, conditionals, and loops, with a README roadmap for broader programming topics.</p>
-        <dl class="meta">
+        <details class="project-details">
+          <summary>Project details</summary>
+          <dl class="meta">
           <div><dt>Current</dt><dd>Python basics, conditional statements, and loops.</dd></div>
           <div><dt>Roadmap</dt><dd>Problem-solving, data structures, file handling, OOP, and more.</dd></div>
-        </dl>
+          </dl>
+        </details>
         <div class="chips"><span>Python</span><span>Programming fundamentals</span><span>Problem-solving</span></div>
         <div class="row">
           <a class="btn g sm" href="https://github.com/Vaidik118/python-programming-practice" target="_blank" rel="noopener">View repository</a>
@@ -491,16 +517,20 @@ footer a.footer-logo:hover{color:var(--brand)!important;transform:none;box-shado
     </article>
 
     <article class="proj">
+      <img class="project-preview" src="car-price-project.png" alt="Car Price Predictor estimating the price of a selected Hyundai i20">
       <div class="body">
         <span class="tag">Machine Learning</span>
         <h3>Car Price Prediction System</h3>
         <p>A Flask app that estimates a used car’s market price from its specifications and serves live predictions on Render.</p>
-        <div class="project-result"><strong>R² 0.90</strong><span>Linear regression model score</span></div>
-        <dl class="meta">
+        <div class="project-result"><strong>Live app</strong><span>Price estimates from car specifications</span></div>
+        <details class="project-details">
+          <summary>Project details</summary>
+          <dl class="meta">
           <div><dt>Approach</dt><dd>Exploratory analysis, preprocessing, and feature engineering.</dd></div>
-          <div><dt>Model</dt><dd>Linear regression evaluated with an R² score.</dd></div>
+          <div><dt>Model</dt><dd>Linear regression trained on cleaned vehicle data.</dd></div>
           <div><dt>Deployment</dt><dd>Flask application hosted on Render.</dd></div>
-        </dl>
+          </dl>
+        </details>
         <div class="chips"><span>Python</span><span>Flask</span><span>Pandas</span><span>Scikit-Learn</span><span>Render</span></div>
         <div class="row">
           <a class="btn p sm" href="https://car-price-predictor-81uf.onrender.com/" target="_blank" rel="noopener">Live demo</a>
@@ -510,16 +540,20 @@ footer a.footer-logo:hover{color:var(--brand)!important;transform:none;box-shado
     </article>
 
     <article class="proj">
+      <img class="project-preview" src="sms-spam-project.png" alt="SMS spam classifier marking a promotional sample message as spam">
       <div class="body">
         <span class="tag">Machine Learning</span>
         <h3>SMS/Email Spam Classifier</h3>
         <p>An NLP app that classifies SMS and email messages as spam or legitimate, available for browser-based testing.</p>
-        <div class="project-result"><strong>TF-IDF</strong><span>Text features for spam classification</span></div>
-        <dl class="meta">
+        <div class="project-result"><strong>95.9%</strong><span>Accuracy · 20% held-out test set</span></div>
+        <details class="project-details">
+          <summary>Project details</summary>
+          <dl class="meta">
           <div><dt>Approach</dt><dd>Text preprocessing and TF-IDF vectorization.</dd></div>
-          <div><dt>Model</dt><dd>Naive Bayes classifier.</dd></div>
+          <div><dt>Model</dt><dd>Multinomial Naive Bayes classifier.</dd></div>
           <div><dt>Deployment</dt><dd>Streamlit Cloud web application.</dd></div>
-        </dl>
+          </dl>
+        </details>
         <div class="chips"><span>Python</span><span>NLP</span><span>TF-IDF</span><span>Scikit-Learn</span><span>Streamlit</span></div>
         <div class="row">
           <a class="btn p sm" href="https://sms-spam-predictor-mbqrjtjv2bqz28zhqot4nu.streamlit.app/" target="_blank" rel="noopener">Live demo</a>
@@ -534,10 +568,13 @@ footer a.footer-logo:hover{color:var(--brand)!important;transform:none;box-shado
         <h3>E-commerce Sales Dashboard</h3>
         <p>An interactive Power BI dashboard for exploring e-commerce performance and supporting business reporting.</p>
         <div class="project-result"><strong>4 KPIs</strong><span>Sales · profit · quantity · order value</span></div>
-        <dl class="meta">
+        <details class="project-details">
+          <summary>Project details</summary>
+          <dl class="meta">
           <div><dt>Metrics</dt><dd>Total sales, profit, quantity, and average order value.</dd></div>
           <div><dt>Dimensions</dt><dd>Month, state, payment mode, and product category.</dd></div>
-        </dl>
+          </dl>
+        </details>
         <div class="chips"><span>Power BI</span><span>Data analysis</span><span>Business reporting</span></div>
       </div>
     </article>
@@ -547,16 +584,20 @@ footer a.footer-logo:hover{color:var(--brand)!important;transform:none;box-shado
         <span class="tag">Deep Learning</span>
         <h3>Deep Learning Studies</h3>
         <p>A notebook-based learning repository exploring neural-network fundamentals and practical classification and regression examples.</p>
-        <dl class="meta">
+        <details class="project-details">
+          <summary>Project details</summary>
+          <dl class="meta">
           <div><dt>Foundations</dt><dd>Perceptrons, neuron examples, hinge loss, and vanishing gradients.</dd></div>
           <div><dt>Experiments</dt><dd>Backpropagation, MNIST, admission prediction, and customer churn.</dd></div>
-        </dl>
+          </dl>
+        </details>
         <div class="chips"><span>Python</span><span>Jupyter</span><span>Perceptrons</span><span>Neural networks</span></div>
         <div class="row">
           <a class="btn g sm" href="https://github.com/Vaidik118/deeplearning" target="_blank" rel="noopener">View repository</a>
         </div>
       </div>
     </article>
+    </div>
   </div>
 </section>
 
@@ -564,50 +605,58 @@ footer a.footer-logo:hover{color:var(--brand)!important;transform:none;box-shado
   <div class="wrap" id="skillwrap">
     <div class="head">
       <h2>Technical skills</h2>
-      <p>Tools and methods used across my machine learning and data analysis projects.</p>
+      <p>Core programming, data workflows, model development, and deployment tools.</p>
     </div>
     <div class="skills">
-      <div class="sk">
-        <h3>Machine learning</h3>
-        <p class="d">Modeling, evaluation and deployment</p>
-        <ul class="skill-list">
-          <li><strong>Supervised & unsupervised learning</strong></li>
-          <li><strong>Scikit-learn</strong></li>
-          <li><strong>Feature Engineering</strong></li>
-          <li><strong>Model training & evaluation</strong></li>
-        </ul>
-        <div class="topics">
-          <span class="pill">Regression</span><span class="pill">Classification</span><span class="pill">Clustering</span><span class="pill">NLP</span><span class="pill">TF-IDF</span><span class="pill">Linear algebra</span><span class="pill">Probability & statistics</span>
+      <details class="sk" open>
+        <summary><h3>Core</h3><p class="d">Programming and machine-learning foundations</p></summary>
+        <div class="sk-content">
+          <ul class="skill-list">
+            <li><strong>Python</strong></li>
+            <li><strong>SQL</strong></li>
+            <li><strong>Machine learning</strong></li>
+            <li><strong>Natural language processing</strong></li>
+          </ul>
         </div>
-      </div>
-      <div class="sk">
-        <h3>Programming & data</h3>
-        <p class="d">Programming, data preparation, and exploratory analysis</p>
-        <ul class="skill-list">
-          <li><strong>Python</strong></li>
-          <li><strong>SQL</strong></li>
-          <li><strong>Pandas & NumPy</strong></li>
-          <li><strong>Matplotlib</strong></li>
-        </ul>
-        <div class="topics">
-          <span class="pill">Data cleaning</span><span class="pill">Data preprocessing</span><span class="pill">Exploratory data analysis (EDA)</span>
+      </details>
+      <details class="sk" open>
+        <summary><h3>Data</h3><p class="d">Preparation, analysis, and visualization</p></summary>
+        <div class="sk-content">
+          <ul class="skill-list">
+            <li><strong>Pandas & NumPy</strong></li>
+            <li><strong>Matplotlib</strong></li>
+            <li><strong>Exploratory data analysis</strong></li>
+            <li><strong>Data cleaning & preprocessing</strong></li>
+          </ul>
         </div>
-      </div>
-      <div class="sk">
-        <h3>BI, deployment & tools</h3>
-        <p class="d">Business reporting, application deployment, and development environments</p>
-        <ul class="skill-list">
-          <li><strong>Flask</strong></li>
-          <li><strong>Power BI</strong></li>
-          <li><strong>Git & GitHub</strong></li>
-          <li><strong>Jupyter Notebook & PyCharm</strong></li>
-          <li><strong>Linux</strong></li>
-        </ul>
-        <div class="topics">
-          <span class="pill">Render</span><span class="pill">Streamlit Cloud</span>
+      </details>
+      <details class="sk" open>
+        <summary><h3>Modeling</h3><p class="d">Training, evaluation, and feature development</p></summary>
+        <div class="sk-content">
+          <ul class="skill-list">
+            <li><strong>Scikit-learn</strong></li>
+            <li><strong>Feature engineering</strong></li>
+            <li><strong>Model training & evaluation</strong></li>
+          </ul>
+          <div class="topics">
+            <span class="pill">Regression</span><span class="pill">Classification</span><span class="pill">Clustering</span><span class="pill">TF-IDF</span>
+          </div>
         </div>
-      </div>
+      </details>
+      <details class="sk" open>
+        <summary><h3>Deployment & tools</h3><p class="d">Application hosting, development, and business intelligence</p></summary>
+        <div class="sk-content">
+          <ul class="skill-list">
+            <li><strong>Flask & Streamlit</strong></li>
+            <li><strong>Render</strong></li>
+            <li><strong>Git & GitHub</strong></li>
+            <li><strong>Power BI</strong></li>
+            <li><strong>Jupyter, PyCharm & Linux</strong></li>
+          </ul>
+        </div>
+      </details>
     </div>
+    <p class="current-focus"><strong>Currently exploring</strong><span>Deep learning · NLP · Generative AI</span></p>
   </div>
 </section>
 
@@ -681,11 +730,42 @@ footer a.footer-logo:hover{color:var(--brand)!important;transform:none;box-shado
 
 <script>
 (function(){
+  var siteHeader=document.querySelector('header');
+  var navigationToggle=document.querySelector('.nav-toggle');
+  var primaryNavigation=document.getElementById('primary-navigation');
+  function setNavigationOpen(isOpen){
+    siteHeader.toggleAttribute('data-nav-open',isOpen);
+    navigationToggle.setAttribute('aria-expanded',String(isOpen));
+    navigationToggle.setAttribute('aria-label',isOpen?'Close navigation':'Open navigation');
+    navigationToggle.title=isOpen?'Close navigation':'Open navigation';
+  }
+  navigationToggle.addEventListener('click',function(){
+    setNavigationOpen(navigationToggle.getAttribute('aria-expanded')!=='true');
+  });
+  primaryNavigation.querySelectorAll('a').forEach(function(link){
+    link.addEventListener('click',function(){setNavigationOpen(false);});
+  });
+  document.addEventListener('keydown',function(event){
+    if(event.key==='Escape'){setNavigationOpen(false);}
+  });
+
   var s=document.getElementById('skillwrap');
   if('IntersectionObserver' in window){
     var o=new IntersectionObserver(function(e){if(e[0].isIntersecting){s.classList.add('on');o.disconnect();}},{threshold:.2});
     o.observe(s);
   } else {s.classList.add('on');}
+
+  var skillCards=document.querySelectorAll('#skills details.sk');
+  var compactSkills=window.matchMedia('(max-width:700px)');
+  var skillLayoutIsCompact;
+  function syncSkillCards(){
+    if(skillLayoutIsCompact===compactSkills.matches)return;
+    skillLayoutIsCompact=compactSkills.matches;
+    skillCards.forEach(function(card){card.open=!skillLayoutIsCompact;});
+  }
+  syncSkillCards();
+  compactSkills.addEventListener('change',syncSkillCards);
+  window.addEventListener('resize',syncSkillCards);
 
   var resumeDialog=document.getElementById('resume-dialog');
   var previousRootStyle;
